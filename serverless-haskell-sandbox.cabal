@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8854392d6a762d0c68caf637a73e3cad9fbd034d54117ec50de97f231d655418
+-- hash: 8c79b6355fcaca34889a697227b3e2f014f3fda14d1ac963b6e283842ec02fdb
 
 name:           serverless-haskell-sandbox
 version:        1.0.0
@@ -11,7 +11,7 @@ description:    Example package to demonstrate deployment of Haskell code onto A
 category:       AWS, Cloud, Network
 homepage:       https://github.com/jabaraster/serverless-haskell-sandbox#readme
 bug-reports:    https://github.com/jabaraster/serverless-haskell-sandbox/issues
-maintainer:     akotlyarov@seek.com.au
+maintainer:     ah@jabara.info
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
