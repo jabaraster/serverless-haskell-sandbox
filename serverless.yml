@@ -1,0 +1,19 @@
+service: serverless-haskell-sandbox
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ap-northeast-1
+
+functions:
+  hello:
+    handler: serverless-haskell-sandbox.example-exe
+  apigw:
+    handler: serverless-haskell-sandbox.api-exe
+    events:
+      - http:
+          path: hello/{name}
+          method: get
+
+plugins:
+  - serverless-haskell

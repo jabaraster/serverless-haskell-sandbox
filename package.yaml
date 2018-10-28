@@ -1,0 +1,36 @@
+name:                serverless-haskell-sandbox
+category:            AWS, Cloud, Network
+maintainer:          ah@jabara.info
+version:             1.0.0
+github:              jabaraster/serverless-haskell-sandbox
+license:             MIT
+synopsis:            Deploying Haskell code onto AWS Lambda using Serverless
+description:         Example package to demonstrate deployment of Haskell code onto AWS Lambda using Serverless
+
+dependencies:
+- base >= 4.7 && < 5
+
+executables:
+  example-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - serverless-haskell
+
+  api-exe:
+    main:                Main.hs
+    source-dirs:         apigw-app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aeson
+    - lens
+    - serverless-haskell
+    - text
+    - unordered-containers
