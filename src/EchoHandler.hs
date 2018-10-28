@@ -1,15 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 module EchoHandler where
 
-import           AWSLambda.Events.APIGateway
-import           Control.Lens
-import qualified Data.HashMap.Strict         as HashMap
+import qualified Data.HashMap.Strict as H
 import           Data.Semigroup
-import           Data.Text                   (Text)
+import           Data.Text           (Text)
 
-handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
-handler request = do
-  putStrLn "This should go to logs"
-  case HashMap.lookup "name" (request ^. agprqPathParameters) of
-    Just name -> return $ responseOK & responseBody ?~ "Hello, " <> name
-    Nothing -> return responseNotFound
+core :: H.HashMap Text Text -> Maybe Text
+core pathParameters =
+  case H.lookup "name" pathParameters of
+    Just name -> Just ("Hello, " <> name)
+    Nothing   -> Nothing
+

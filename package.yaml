@@ -13,11 +13,9 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-  - serverless-haskell
   - text
   - aeson
   - unordered-containers
-  - lens
 
 executables:
   hello:
@@ -28,6 +26,8 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - text
+    - lens
     - serverless-haskell
     - serverless-haskell-sandbox
 
@@ -39,5 +39,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - text
+    - lens
     - serverless-haskell
     - serverless-haskell-sandbox
