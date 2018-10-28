@@ -7,7 +7,5 @@ import           Data.Text           (Text)
 
 core :: H.HashMap Text Text -> Maybe Text
 core pathParameters =
-  case H.lookup "name" pathParameters of
-    Just name -> Just ("Hello, " <> name)
-    Nothing   -> Nothing
-
+  H.lookup "name" pathParameters
+  >>= Just
