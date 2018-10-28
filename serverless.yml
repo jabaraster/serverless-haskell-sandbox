@@ -7,12 +7,16 @@ provider:
 
 functions:
   hello:
-    handler: serverless-haskell-sandbox.example-exe
-  apigw:
-    handler: serverless-haskell-sandbox.api-exe
+    handler: serverless-haskell-sandbox.hello # <serviceの値>.<exeの名前>
     events:
       - http:
-          path: hello/{name}
+          path: hello
+          method: get
+  echo:
+    handler: serverless-haskell-sandbox.echo
+    events:
+      - http:
+          path: echo/{name}
           method: get
 
 plugins:
