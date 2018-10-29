@@ -22,6 +22,6 @@ instance ToText HttpInfo where
     toText = jsonToText
 
 instance ToText () where
-    toText = ""
+    toText _ = ""
 instance FromText () where
     parser = return ()

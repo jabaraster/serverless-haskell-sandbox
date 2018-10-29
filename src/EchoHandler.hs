@@ -8,4 +8,4 @@ import           Data.Text           (Text)
 core :: H.HashMap Text Text -> Maybe Text
 core pathParameters =
   H.lookup "name" pathParameters
-  >>= Just
+  >>= \t -> Just $ "Hello, " <> t
