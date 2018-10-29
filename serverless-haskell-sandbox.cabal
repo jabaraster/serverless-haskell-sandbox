@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 54875be646f220646e5741c0a3f46f149df2905da8239e11a1bf5cbd2e2f2a81
+-- hash: 48a8536520fc54ee43d437674a77c4dd919cc8f10e830a9d7bd77299923d6878
 
 name:           serverless-haskell-sandbox
 version:        1.0.0
@@ -23,10 +23,13 @@ source-repository head
 
 library
   exposed-modules:
+      AWSLib
       EchoHandler
+      GetDataHandler
       HelloHandler
       HttpHandler
       Lib
+      PostDataHandler
       Types
   other-modules:
       Paths_serverless_haskell_sandbox
@@ -34,7 +37,10 @@ library
       src
   build-depends:
       aeson
+    , amazonka
     , amazonka-core
+    , amazonka-dynamodb
+    , attoparsec
     , base >=4.7 && <5
     , bytestring
     , http-types
@@ -42,6 +48,7 @@ library
     , serverless-haskell
     , text
     , unordered-containers
+    , uuid
   default-language: Haskell2010
 
 executable echo
@@ -57,6 +64,20 @@ executable echo
     , serverless-haskell
     , serverless-haskell-sandbox
     , text
+  default-language: Haskell2010
+
+executable getData
+  main-is: Main.hs
+  other-modules:
+      Paths_serverless_haskell_sandbox
+  hs-source-dirs:
+      app/getData
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , lens
+    , serverless-haskell
+    , serverless-haskell-sandbox
   default-language: Haskell2010
 
 executable hello
@@ -85,6 +106,22 @@ executable http
       aeson
     , base >=4.7 && <5
     , bytestring
+    , lens
+    , serverless-haskell
+    , serverless-haskell-sandbox
+    , text
+  default-language: Haskell2010
+
+executable postData
+  main-is: Main.hs
+  other-modules:
+      Paths_serverless_haskell_sandbox
+  hs-source-dirs:
+      app/postData
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
     , lens
     , serverless-haskell
     , serverless-haskell-sandbox

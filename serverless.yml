@@ -4,6 +4,15 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: ap-northeast-1
+  memorySize: 256
+  environment:
+      FIRST_TABLE: ${self:provider.stage}_FirstTable
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - dynamodb:*
+    Resource:
+    - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
 
 functions:
   hello:
@@ -24,6 +33,37 @@ functions:
       - http:
           path: http
           method: get
+  postData:
+    handler: serverless-haskell-sandbox.postData
+    events:
+      - http:
+          path: data/
+          method: post
+  getData:
+    handler: serverless-haskell-sandbox.getData
+    events:
+      - http:
+          path: data/
+          method: get
+
+resources:
+  Resources:
+    FirstTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.FIRST_TABLE}
 
 plugins:
   - serverless-haskell
