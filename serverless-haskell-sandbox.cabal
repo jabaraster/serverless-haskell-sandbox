@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1c456c28cb14f6886799e7a14769f4f4deaf8cec6f064828f38feba831fc919d
+-- hash: 54875be646f220646e5741c0a3f46f149df2905da8239e11a1bf5cbd2e2f2a81
 
 name:           serverless-haskell-sandbox
 version:        1.0.0
@@ -25,13 +25,21 @@ library
   exposed-modules:
       EchoHandler
       HelloHandler
+      HttpHandler
+      Lib
+      Types
   other-modules:
       Paths_serverless_haskell_sandbox
   hs-source-dirs:
       src
   build-depends:
       aeson
+    , amazonka-core
     , base >=4.7 && <5
+    , bytestring
+    , http-types
+    , lens
+    , serverless-haskell
     , text
     , unordered-containers
   default-language: Haskell2010
@@ -60,6 +68,23 @@ executable hello
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , lens
+    , serverless-haskell
+    , serverless-haskell-sandbox
+    , text
+  default-language: Haskell2010
+
+executable http
+  main-is: Main.hs
+  other-modules:
+      Paths_serverless_haskell_sandbox
+  hs-source-dirs:
+      app/http
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
     , lens
     , serverless-haskell
     , serverless-haskell-sandbox

@@ -18,6 +18,12 @@ functions:
       - http:
           path: echo/{name}
           method: get
+  http:
+    handler: serverless-haskell-sandbox.http
+    events:
+      - http:
+          path: http
+          method: get
 
 plugins:
   - serverless-haskell

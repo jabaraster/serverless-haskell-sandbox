@@ -14,8 +14,13 @@ library:
   source-dirs: src
   dependencies:
   - text
+  - bytestring
   - aeson
   - unordered-containers
+  - lens
+  - serverless-haskell
+  - http-types
+  - amazonka-core
 
 executables:
   hello:
@@ -40,6 +45,21 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - text
+    - lens
+    - serverless-haskell
+    - serverless-haskell-sandbox
+
+  http:
+    main:                Main.hs
+    source-dirs:         app/http
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - text
+    - aeson
+    - bytestring
     - lens
     - serverless-haskell
     - serverless-haskell-sandbox
