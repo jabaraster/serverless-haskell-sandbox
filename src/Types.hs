@@ -10,7 +10,7 @@ import           GHC.Generics
 import           Network.AWS.Data.Text
 
 import qualified Data.ByteString.Lazy.Char8 as BS (pack)
-import qualified Data.Text                  as T (unpack)
+import qualified Data.Text                  as T (intercalate, pack, unpack)
 import           Lib
 
 {-|
@@ -21,6 +21,11 @@ instance ToText () where
 instance FromText () where
     parser = return ()
 
+instance ToText (String, String) where
+    toText (f, s) = "{\"" <> (T.pack f) <> "\": \"" <> (T.pack s) <> "\"}"
+instance ToText [(String, String)] where
+    toText ts = "[" <> (T.intercalate "," $ map toText ts) <> "]"
+
 {-|
  - HTTPリクエストの情報を格納する.
  -}
@@ -29,6 +34,7 @@ type Headers = [(Text, Text)]
 data HttpInfo = HttpInfo {
     pathParameters :: H.HashMap Text Text
   , headers        :: [(Text, Text)]
+  , environments   :: [(String, String)]
 } deriving (Generic, Show)
 
 instance ToJSON HttpInfo

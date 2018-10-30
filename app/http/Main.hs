@@ -15,4 +15,7 @@ main :: IO ()
 main = apiGatewayMain handler
 
 handler :: APIGatewayProxyRequest () -> IO (APIGatewayProxyResponse HttpInfo)
-handler request = return $ responseOK & responseBody?~(core request)
+handler request = do
+  res <- core request
+  return $ responseOK&responseBody ?~ res
+

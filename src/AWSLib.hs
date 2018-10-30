@@ -7,12 +7,15 @@ import           Data.Text                  (Text, pack)
 import           Network.AWS
 import           Network.AWS.DynamoDB
 import           Network.AWS.DynamoDB.Types
+import           System.Environment
 
 awsEnv :: IO Env
 awsEnv = do
-    -- e <- newEnv $ FromEnv "AWS_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY" Nothing Nothing
-    putStrLn "Try creation env."
-    e <- newEnv Discover
+    putStrLn "------- Try creation new env."
+    getEnv "AWS_ACCESS_KEY_ID" >>= putStrLn
+    getEnv "AWS_SECRET_ACCESS_KEY" >>= putStrLn
+    e <- newEnv $ FromEnv "AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" Nothing Nothing
+    putStrLn "------- env created."
     pure $ e&envRegion .~ Tokyo
 
 runScan :: Env -> String -> IO ScanResponse

@@ -12,9 +12,16 @@ provider:
     Action:
     - dynamodb:*
     Resource:
-    - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+    - Fn::GetAtt: [ FirstTable, Arn ]
+        #    - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
 
 functions:
+  env:
+    handler: serverless-haskell-sandbox.env
+    events:
+      - http:
+          path: env
+          method: get
   hello:
     handler: serverless-haskell-sandbox.hello # <serviceの値>.<exeの名前>
     events:
