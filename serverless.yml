@@ -48,6 +48,7 @@ functions:
           method: post
   getData:
     handler: serverless-haskell-sandbox.getData
+    timeout: 30
     events:
       - http:
           path: data/

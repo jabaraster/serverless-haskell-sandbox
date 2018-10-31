@@ -18,7 +18,12 @@ core :: IO (Maybe [DynamoDbRecord])
 core = do
   env <- awsEnv
   tableName <- getEnv "FIRST_TABLE"
+
+  putStrLn "Get env. next ---> execute scan."
+
   res <- runScan env tableName
+  putStrLn "Scanned!"
+
   case res^.srsResponseStatus of
     200 -> return $ Just $ map cnv $ res^.srsItems
     _   -> return Nothing
