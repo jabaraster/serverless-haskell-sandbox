@@ -1,3 +1,4 @@
 .serverless/
 .stack-work/
 node_modules/
+local-env.sh
