@@ -7,6 +7,7 @@ provider:
   memorySize: 256
   environment:
       FIRST_TABLE: ${self:provider.stage}_FirstTable
+
   iamRoleStatements:
   - Effect: Allow
     Action:
@@ -52,6 +53,13 @@ functions:
     events:
       - http:
           path: data/
+          method: get
+  getData:
+    handler: serverless-haskell-sandbox.s3
+    timeout: 30
+    events:
+      - http:
+          path: s3/
           method: get
 
 resources:

@@ -1,23 +1,29 @@
 {-# LANGUAGE OverloadedStrings #-}
 module AWSLib where
 
+import qualified Control.Exception          as E (SomeException, handle)
 import           Control.Lens
+import           Data.Monoid
 import           Data.Text                  (Text, pack)
-import Data.Monoid
+import           System.Environment
 
 import           Network.AWS
-import           Network.AWS.Env
 import           Network.AWS.DynamoDB
 import           Network.AWS.DynamoDB.Types
-import           System.Environment
+import           Network.AWS.Env
+import           Network.AWS.S3
 
 awsEnv :: IO Env
 awsEnv = do
-    e <- newEnv $ FromEnv "AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" (Just "AWS_SESSION_TOKEN") Nothing
-    print $ (_svcEndpoint dynamoDB) Tokyo
+
+    printEnv "AWS_ACCESS_KEY_ID"
+    printEnv "AWS_SECRET_ACCESS_KEY"
+    printEnv "AWS_SESSION_TOKEN"
+
+    e <- newEnv $ FromEnv "AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" Nothing Nothing
     pure $ e {
       _envRegion = Tokyo
-    , _envOverride = override
+    -- , _envOverride = override
     }
   where
     override :: Dual (Endo Service)
@@ -37,7 +43,18 @@ awsEnv = do
 runScan :: Env -> String -> IO ScanResponse
 runScan env tableName = run env $ scan $ pack tableName
 
+runListBuckets :: Env -> IO ListBucketsResponse
+runListBuckets env = run env $ listBuckets
+
 runPutItem :: Env -> PutItem -> IO PutItemResponse
 runPutItem env putItem = run env putItem
 
 run env = runResourceT . runAWS env . send
+
+printEnv :: String -> IO ()
+printEnv s = E.handle (err s) $ do
+               e <- getEnv s
+               putStrLn $ s ++ ": " ++ e
+  where
+    err :: String -> E.SomeException -> IO ()
+    err s e = putStrLn $ s ++ ": " ++ (show e)

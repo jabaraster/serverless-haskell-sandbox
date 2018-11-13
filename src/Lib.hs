@@ -4,6 +4,8 @@ import           Data.Aeson
 import           Data.Attoparsec.Text
 import           Data.ByteString            (ByteString)
 import qualified Data.ByteString.Char8      as BSC (unpack)
+import qualified Data.ByteString.Lazy       as LBS (ByteString)
+import qualified Data.ByteString.Lazy.Char8 as LBSC (unpack)
 import qualified Data.ByteString.Lazy.Char8 as LBSC (pack, unpack)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as DT (pack, unpack)
@@ -18,5 +20,8 @@ textToJsonParser = do
     Just res -> return res
     Nothing  -> fail "invalid json."
 
-byteStringToText :: ByteString -> Text
-byteStringToText = DT.pack . BSC.unpack
+bsToText :: ByteString -> Text
+bsToText = DT.pack . BSC.unpack
+
+lbsToText :: LBS.ByteString -> Text
+lbsToText = DT.pack . LBSC.unpack

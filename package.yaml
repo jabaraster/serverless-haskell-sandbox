@@ -24,8 +24,12 @@ library:
   - amazonka
   - amazonka-core
   - amazonka-dynamodb
+  - amazonka-s3
   - attoparsec
   - unordered-containers
+  - http-client
+  - http-conduit
+  - directory
 
 executables:
   env:
@@ -99,6 +103,20 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - lens
+    - serverless-haskell
+    - serverless-haskell-sandbox
+  s3:
+    main:                Main.hs
+    source-dirs:         app/s3
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aeson
+    - bytestring
+    - text
     - lens
     - serverless-haskell
     - serverless-haskell-sandbox

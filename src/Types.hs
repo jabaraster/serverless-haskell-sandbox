@@ -4,13 +4,13 @@
 module Types where
 
 import           Data.Aeson
+import qualified Data.ByteString.Lazy.Char8 as BS (pack)
 import qualified Data.HashMap.Strict        as H
+import qualified Data.Text                  as T (intercalate, pack, unpack)
 import           GHC.Generics
 
 import           Network.AWS.Data.Text
 
-import qualified Data.ByteString.Lazy.Char8 as BS (pack)
-import qualified Data.Text                  as T (intercalate, pack, unpack)
 import           Lib
 
 {-|
@@ -32,9 +32,11 @@ instance ToText [(String, String)] where
 type Headers = [(Text, Text)]
 
 data HttpInfo = HttpInfo {
-    pathParameters :: H.HashMap Text Text
-  , headers        :: [(Text, Text)]
-  , environments   :: [(String, String)]
+    pathParameters      :: H.HashMap Text Text
+  , headers             :: [(Text, Text)]
+  , environments        :: [(String, String)]
+  , securityCredentials :: Text
+  , files               :: [String]
 } deriving (Generic, Show)
 
 instance ToJSON HttpInfo
@@ -61,3 +63,6 @@ instance ToText DynamoDbRecord where
 instance ToText [DynamoDbRecord] where
     toText = jsonToText
 emptyDynamoDbRecord = DynamoDbRecord "" ""
+
+instance ToText [Text] where
+    toText = jsonToText

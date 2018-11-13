@@ -17,7 +17,6 @@ import           Types
 core :: IO (Maybe [DynamoDbRecord])
 core = do
   env <- awsEnv
-  print $ env^.envRegion
   tableName <- getEnv "FIRST_TABLE"
 
   putStrLn "Get env. next ---> execute scan."
