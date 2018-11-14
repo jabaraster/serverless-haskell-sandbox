@@ -11,6 +11,7 @@ import           AWSLib
 core :: IO ([Text])
 core = do
     res <- runListBuckets =<< awsEnv
+    mapM_ (print . cnv) $ res^.lbrsBuckets
     pure $ map cnv $ res^.lbrsBuckets
   where
     cnv :: Bucket -> Text

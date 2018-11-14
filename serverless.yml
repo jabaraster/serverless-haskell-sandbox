@@ -54,7 +54,7 @@ functions:
       - http:
           path: data/
           method: get
-  getData:
+  s3:
     handler: serverless-haskell-sandbox.s3
     timeout: 30
     events:
