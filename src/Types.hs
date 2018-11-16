@@ -37,6 +37,7 @@ data HttpInfo = HttpInfo {
   , environments        :: [(String, String)]
   , securityCredentials :: Text
   , files               :: [String]
+  , option              :: Text
 } deriving (Generic, Show)
 
 instance ToJSON HttpInfo

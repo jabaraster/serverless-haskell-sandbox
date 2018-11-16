@@ -16,14 +16,14 @@ import           Types
 core :: APIGatewayProxyRequest () -> IO HttpInfo
 core req = do
   envs    <- getEnvironment
-  -- credRes <- httpLbs "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
-  files   <- getHomeDirectory >>= getDirectoryContents
+  httpRes <- httpLbs "https://httpbin.org/ip"
   return $ HttpInfo {
              pathParameters = req^.agprqPathParameters
            , headers = map cnv $ req^.agprqHeaders
            , environments = envs
            , securityCredentials = ""
-           , files = files
+           , files = []
+           , option = lbsToText $ getResponseBody httpRes
            }
   where
     cnv :: Header -> (Text, Text)
