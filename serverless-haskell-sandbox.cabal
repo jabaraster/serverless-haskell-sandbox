@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: eed3a6c93e7e0f2b47dcadfa300bf60f2bca47036ed58cb0a61bd47eea126cb1
+-- hash: a524e3de4e6d62255ff97a4876f3eb0b7d8983cadc18a165ba4da2fa90283ecb
 
 name:           serverless-haskell-sandbox
 version:        1.0.0
@@ -170,7 +170,9 @@ test-suite dynamodb-test
   main-is: Spec.hs
   other-modules:
       GetDataHandlerSpec
+      HttpHandlerSpec
       S3HandlerSpec
+      TestLib
       Paths_serverless_haskell_sandbox
   hs-source-dirs:
       test
@@ -180,4 +182,5 @@ test-suite dynamodb-test
     , hspec
     , serverless-haskell
     , serverless-haskell-sandbox
+    , unordered-containers
   default-language: Haskell2010

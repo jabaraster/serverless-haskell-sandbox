@@ -1,12 +1,12 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module Types where
 
 import           Data.Aeson
-import qualified Data.ByteString.Lazy.Char8 as BS (pack)
-import qualified Data.HashMap.Strict        as H
-import qualified Data.Text                  as T (intercalate, pack, unpack)
+import qualified Data.HashMap.Strict   as H
+import qualified Data.Text             as T (intercalate, pack)
 import           GHC.Generics
 
 import           Network.AWS.Data.Text
@@ -63,6 +63,8 @@ instance ToText DynamoDbRecord where
     toText = jsonToText
 instance ToText [DynamoDbRecord] where
     toText = jsonToText
+
+emptyDynamoDbRecord :: DynamoDbRecord
 emptyDynamoDbRecord = DynamoDbRecord "" ""
 
 instance ToText [Text] where

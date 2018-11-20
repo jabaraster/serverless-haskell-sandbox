@@ -130,6 +130,7 @@ tests:
         - -with-rtsopts=-N
         dependencies:
         - hspec
+        - unordered-containers
         - serverless-haskell
         - serverless-haskell-sandbox
 

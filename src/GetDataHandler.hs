@@ -28,13 +28,13 @@ core = do
     200 -> return $ Just $ map cnv $ res^.srsItems
     _   -> return Nothing
   where
-    cnv2 :: HashMap Text AttributeValue -> DynamoDbRecord
-    cnv2 rec = let id = rec ^? key "id" . key "S" . _String
-                   nm = rec ^? key "name" . key "S" . _String
-               in  DynamoDbRecord {
-                     ddrId = id
-                   , ddrName = nm
-                   }
+    -- cnv2 :: HashMap Text AttributeValue -> DynamoDbRecord
+    -- cnv2 rec = let id = rec ^? key "id" . key "S" . _String
+    --                nm = rec ^? key "name" . key "S" . _String
+    --            in  DynamoDbRecord {
+    --                  ddrId = id
+    --                , ddrName = nm
+    --                }
     cnv :: HashMap Text AttributeValue -> DynamoDbRecord
     cnv rec = let id = lookup "id" rec
                          >>= \v -> v^.avS

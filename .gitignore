@@ -2,3 +2,4 @@
 .stack-work/
 node_modules/
 local-env.sh
+local-env.txt

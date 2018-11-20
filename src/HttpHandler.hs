@@ -7,7 +7,6 @@ import           Data.Text                   (Text)
 import qualified Data.Text                   as DT (pack)
 import           Network.HTTP.Simple
 import           Network.HTTP.Types
-import           System.Directory
 import           System.Environment
 
 import           Lib
@@ -16,7 +15,9 @@ import           Types
 core :: APIGatewayProxyRequest () -> IO HttpInfo
 core req = do
   envs    <- getEnvironment
+  print envs
   httpRes <- httpLbs "https://httpbin.org/ip"
+  putStrLn "=============="
   return $ HttpInfo {
              pathParameters = req^.agprqPathParameters
            , headers = map cnv $ req^.agprqHeaders

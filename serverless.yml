@@ -2,7 +2,8 @@ service: serverless-haskell-sandbox
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: haskell
+  timeout: 30
   region: ap-northeast-1
   memorySize: 256
   environment:
@@ -49,7 +50,6 @@ functions:
           method: post
   getData:
     handler: serverless-haskell-sandbox.getData
-    timeout: 30
     events:
       - http:
           path: data/

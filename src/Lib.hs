@@ -5,7 +5,6 @@ import           Data.Attoparsec.Text
 import           Data.ByteString            (ByteString)
 import qualified Data.ByteString.Char8      as BSC (unpack)
 import qualified Data.ByteString.Lazy       as LBS (ByteString)
-import qualified Data.ByteString.Lazy.Char8 as LBSC (unpack)
 import qualified Data.ByteString.Lazy.Char8 as LBSC (pack, unpack)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as DT (pack, unpack)

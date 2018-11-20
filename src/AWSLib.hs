@@ -16,11 +16,11 @@ import           Network.AWS.S3
 awsEnv :: IO Env
 awsEnv = do
 
-    printEnv "AWS_ACCESS_KEY_ID"
-    printEnv "AWS_SECRET_ACCESS_KEY"
-    printEnv "AWS_SESSION_TOKEN"
+--    printEnv "AWS_ACCESS_KEY_ID"
+--    printEnv "AWS_SECRET_ACCESS_KEY"
+--    printEnv "AWS_SESSION_TOKEN"
 
-    e <- newEnv $ FromEnv "AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" Nothing Nothing
+    e <- newEnv $ FromEnv "AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" (Just "AWS_SESSION_TOKEN") Nothing
     pure $ e {
       _envRegion = Tokyo
     -- , _envOverride = override
