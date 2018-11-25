@@ -15,8 +15,7 @@ import           Types
 core :: APIGatewayProxyRequest () -> IO HttpInfo
 core req = do
   envs    <- getEnvironment
-  print envs
-  httpRes <- httpLbs "https://httpbin.org/ip"
+  -- httpRes <- httpLbs "https://httpbin.org/ip"
   putStrLn "=============="
   return $ HttpInfo {
              pathParameters = req^.agprqPathParameters
@@ -24,7 +23,7 @@ core req = do
            , environments = envs
            , securityCredentials = ""
            , files = []
-           , option = lbsToText $ getResponseBody httpRes
+           , option = "" -- lbsToText $ getResponseBody httpRes
            }
   where
     cnv :: Header -> (Text, Text)

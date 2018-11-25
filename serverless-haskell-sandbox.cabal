@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a524e3de4e6d62255ff97a4876f3eb0b7d8983cadc18a165ba4da2fa90283ecb
+-- hash: bda73ed34878b9f2782c1eeb8c5491e2758559c344bd09bbbc0c2f6608629b2b
 
 name:           serverless-haskell-sandbox
 version:        1.0.0
@@ -94,7 +94,8 @@ executable getData
       app/getData
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HTTP
+    , base >=4.7 && <5
     , lens
     , serverless-haskell
     , serverless-haskell-sandbox

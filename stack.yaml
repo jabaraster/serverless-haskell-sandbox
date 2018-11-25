@@ -3,7 +3,8 @@ resolver: lts-12.0
 packages:
 - .
 - ../amazonka/amazonka
-- ../serverless-haskell
+- ../http-client/http-conduit
+  # - ../serverless-haskell
   # - ../amazonka/core
   # - ../amazonka/amazonka-dynamodb
   # - ../amazonka/amazonka-s3

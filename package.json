@@ -6,11 +6,13 @@
     "test": "test"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "npm": "^6.4.1",
-    "serverless": "^1.33.1"
+    "serverless": "^1.33.2"
   },
   "devDependencies": {
-    "serverless-haskell": "^0.8.3"
+    "axios": "^0.18.0",
+    "serverless-haskell": "file:../serverless-haskell/serverless-plugin"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

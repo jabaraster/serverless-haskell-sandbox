@@ -14,8 +14,8 @@ provider:
     Action:
     - dynamodb:*
     Resource:
-    - Fn::GetAtt: [ FirstTable, Arn ]
-        #    - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+        # - Fn::GetAtt: [ FirstTable, Arn ]
+    - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
 
 functions:
   env:
@@ -56,10 +56,16 @@ functions:
           method: get
   s3:
     handler: serverless-haskell-sandbox.s3
-    timeout: 30
     events:
       - http:
           path: s3/
+          method: get
+  byjs:
+    runtime: nodejs6.10
+    handler: handler.hello
+    events:
+      - http:
+          path: byjs/
           method: get
 
 resources:
